@@ -4,10 +4,12 @@ import PromptCard from '../components/PromptCard'
 import SearchBar from '../components/SearchBar'
 import FilterBar from '../components/FilterBar'
 import { prompts } from '../data/prompts'
+import { useTheme } from '../context/ThemeContext'
 
 export default function PromptSkills() {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
+  const { theme } = useTheme()
 
   const filtered = useMemo(() => {
     return prompts.filter(p => {
@@ -22,49 +24,35 @@ export default function PromptSkills() {
   }, [search, activeCategory])
 
   return (
-    <div style={{ padding: '100px 60px 60px', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Page Header */}
-      <div style={{ marginBottom: '48px' }}>
-        <p style={{
-          color: '#8b5cf6', fontSize: '12px',
-          letterSpacing: '0.2em', marginBottom: '12px',
-          fontFamily: "'DM Mono', monospace",
-        }}>
-          PROMPT SKILLS
-        </p>
-        <h1 style={{
-          fontFamily: "'Syne', sans-serif",
-          fontSize: 'clamp(32px, 5vw, 52px)',
-          fontWeight: 800, letterSpacing: '-2px',
-          lineHeight: 1.1, marginBottom: '16px',
-          color: '#f1f5f9',
-        }}>
-          AI Prompt Library
-        </h1>
-        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '15px' }}>
-          {prompts.length} prompts · Click to copy instantly
-        </p>
-      </div>
+    <div style={{ padding: '48px 48px 60px', maxWidth: '1100px' }}>
+      <p style={{ color: theme.accent, fontSize: '11px', letterSpacing: '0.2em', marginBottom: '10px' }}>
+        PROMPT SKILLS
+      </p>
+      <h1 style={{
+        fontFamily: "'Syne', sans-serif",
+        fontSize: 'clamp(26px, 4vw, 44px)',
+        fontWeight: 800, letterSpacing: '-1.5px',
+        color: theme.text, marginBottom: '6px',
+      }}>
+        AI Prompt Library
+      </h1>
+      <p style={{ color: theme.textMuted, fontSize: '13px', marginBottom: '28px' }}>
+        {prompts.length} prompts · click to copy
+      </p>
 
-      {/* Controls */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '28px' }}>
         <SearchBar value={search} onChange={setSearch} />
         <FilterBar active={activeCategory} onChange={setActiveCategory} />
       </div>
 
-      {/* Results count */}
-      <p style={{
-        color: 'rgba(255,255,255,0.25)', fontSize: '12px',
-        marginBottom: '24px', fontFamily: "'DM Mono', monospace",
-      }}>
+      <p style={{ color: theme.textFaint, fontSize: '11px', marginBottom: '20px', fontFamily: "'DM Mono'" }}>
         {filtered.length} result{filtered.length !== 1 ? 's' : ''}
       </p>
 
-      {/* Grid */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+        gap: '16px',
       }}>
         <AnimatePresence>
           {filtered.length > 0
@@ -72,7 +60,7 @@ export default function PromptSkills() {
             : (
               <div style={{
                 gridColumn: '1 / -1', textAlign: 'center',
-                padding: '80px 0', color: 'rgba(255,255,255,0.2)',
+                padding: '60px 0', color: theme.textFaint, fontSize: '13px',
               }}>
                 No prompts found for "{search}"
               </div>

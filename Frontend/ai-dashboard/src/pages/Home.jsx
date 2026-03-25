@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FiZap, FiBook, FiHelpCircle, FiCheckSquare, FiArrowRight } from 'react-icons/fi'
+import { useTheme } from '../context/ThemeContext'
 
 const modules = [
   { to: '/prompts',   icon: FiZap,         label: 'Prompt Skills',       desc: 'AI prompt templates — copy & reuse instantly', color: '#8b5cf6' },
@@ -9,9 +10,10 @@ const modules = [
 ]
 
 export default function Home() {
+  const { theme } = useTheme()
   return (
     <div style={{ padding: '60px', maxWidth: '900px' }}>
-      <p style={{ color: '#8b5cf6', fontSize: '12px', letterSpacing: '0.2em', marginBottom: '12px' }}>
+      <p style={{ color: theme.accent, fontSize: '12px', letterSpacing: '0.2em', marginBottom: '12px' }}>
         PERSONAL KNOWLEDGE BASE
       </p>
       <h1 style={{
@@ -22,7 +24,7 @@ export default function Home() {
       }}>
         CROKit
       </h1>
-      <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '15px', marginBottom: '56px', maxWidth: '480px' }}>
+      <p style={{ color: theme.textMuted, fontSize: '15px', marginBottom: '56px', maxWidth: '480px' }}>
         Everything you need to think, analyze, and execute CRO — in one place.
       </p>
 
@@ -40,8 +42,8 @@ export default function Home() {
                 e.currentTarget.style.background = `${color}08`
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-                e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
+                e.currentTarget.style.borderColor = theme.sidebarBorder
+                e.currentTarget.style.background = theme.sidebarBg
               }}
             >
               <div style={{
@@ -57,15 +59,15 @@ export default function Home() {
                   <p style={{
                     fontFamily: "'Syne', sans-serif",
                     fontWeight: 700, fontSize: '16px',
-                    color: '#f1f5f9', marginBottom: '6px',
+                    color: theme.text, marginBottom: '6px',
                   }}>
                     {label}
                   </p>
-                  <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '13px', lineHeight: 1.5 }}>
+                  <p style={{ color: theme.textMuted, fontSize: '13px', lineHeight: 1.5 }}>
                     {desc}
                   </p>
                 </div>
-                <FiArrowRight size={16} style={{ color: 'rgba(255,255,255,0.2)', marginTop: '2px', flexShrink: 0 }} />
+                <FiArrowRight size={16} style={{ color: theme.textMuted, marginTop: '2px', flexShrink: 0 }} />
               </div>
             </div>
           </Link>

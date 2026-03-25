@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { clientChecklist } from '../data/clientChecklist'
 import { FiCheckCircle, FiCircle } from 'react-icons/fi'
+import { useTheme } from '../context/ThemeContext'
 
 export default function ClientChecklist() {
   const total = clientChecklist.flatMap(s => s.items).length
+  const { theme } = useTheme()
   const [checked, setChecked] = useState({})
 
   const toggle = (id) => setChecked(prev => ({ ...prev, [id]: !prev[id] }))
@@ -11,7 +13,7 @@ export default function ClientChecklist() {
 
   return (
     <div style={{ padding: '48px 60px', maxWidth: '820px' }}>
-      <p style={{ color: '#f59e0b', fontSize: '12px', letterSpacing: '0.2em', marginBottom: '12px' }}>
+      <p style={{ color: theme.accent, fontSize: '12px', letterSpacing: '0.2em', marginBottom: '12px' }}>
         CLIENT CHECKLIST
       </p>
       <h1 style={{
@@ -21,23 +23,23 @@ export default function ClientChecklist() {
       }}>
         Pre-Engagement Checklist
       </h1>
-      <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '14px', marginBottom: '8px' }}>
+      <p style={{ color: theme.textMuted, fontSize: '14px', marginBottom: '8px' }}>
         Use before starting any new client engagement
       </p>
 
       {/* Progress */}
       <div style={{ marginBottom: '40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>Progress</span>
-          <span style={{ color: '#f59e0b', fontSize: '12px', fontFamily: "'DM Mono'" }}>
+          <span style={{ color: theme.accent, fontSize: '12px' }}>Progress</span>
+          <span style={{ color: theme.accent, fontSize: '12px', fontFamily: "'DM Mono'" }}>
             {checkedCount} / {total}
           </span>
         </div>
         <div style={{ height: '4px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }}>
           <div style={{
             height: '100%', borderRadius: '2px',
-            background: 'linear-gradient(90deg, #f59e0b, #fbbf24)',
-            width: `${(checkedCount / total) * 100}%`,
+            background: 'linear-gradient(90deg, #f59e0b, #24fb2fff)',
+            width: `${(checkedCount / total) * 100}%`,   
             transition: 'width 0.3s ease',
           }} />
         </div>
@@ -49,7 +51,7 @@ export default function ClientChecklist() {
             <p style={{
               fontFamily: "'Syne', sans-serif",
               fontWeight: 700, fontSize: '16px',
-              color: '#f1f5f9', marginBottom: '14px',
+              color: theme.text, marginBottom: '14px',
               paddingBottom: '10px',
               borderBottom: '1px solid rgba(255,255,255,0.06)',
             }}>
@@ -69,12 +71,12 @@ export default function ClientChecklist() {
                   }}
                 >
                   {checked[item.id]
-                    ? <FiCheckCircle size={16} color="#f59e0b" style={{ marginTop: '2px', flexShrink: 0 }} />
-                    : <FiCircle size={16} color="rgba(255,255,255,0.2)" style={{ marginTop: '2px', flexShrink: 0 }} />
+                    ? <FiCheckCircle size={16} color={theme.accent} style={{ marginTop: '2px', flexShrink: 0 }} />
+                    : <FiCircle size={16} color={theme.textMuted} style={{ marginTop: '2px', flexShrink: 0 }} />
                   }
                   <span style={{
                     fontSize: '13px', lineHeight: 1.6,
-                    color: checked[item.id] ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.6)',
+                    color: checked[item.id] ? theme.accent : theme.textMuted,
                     textDecoration: checked[item.id] ? 'line-through' : 'none',
                     transition: 'all 0.15s',
                   }}>

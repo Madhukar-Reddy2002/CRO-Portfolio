@@ -1,68 +1,94 @@
 import { useState } from 'react'
-import { learningPath } from '../data/learningPath'
 import { motion } from 'framer-motion'
+import { learningPath } from '../data/learningPath'
+import { useTheme } from '../context/ThemeContext'
 
 export default function CROLearningPath() {
   const allTopics = learningPath.flatMap(s => s.topics)
   const [active, setActive] = useState(allTopics[0].id)
+  const { theme } = useTheme()
   const current = allTopics.find(t => t.id === active)
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
-      {/* Doc nav */}
+
+      {/* Doc nav panel */}
       <div style={{
-        width: '240px', flexShrink: 0, overflowY: 'auto',
-        borderRight: '1px solid rgba(255,255,255,0.06)',
-        padding: '28px 12px',
+        width: '230px', flexShrink: 0, overflowY: 'auto',
+        borderRight: `1px solid ${theme.sidebarBorder}`,
+        padding: '24px 10px',
+        background: theme.sidebarBg,
+        transition: 'background 0.3s',
       }}>
-        <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: '11px', letterSpacing: '0.15em', padding: '0 8px', marginBottom: '16px' }}>
-          CRO LEARNING PATH
-        </p>
         {learningPath.map(section => (
-          <div key={section.id} style={{ marginBottom: '24px' }}>
+          <div key={section.id} style={{ marginBottom: '20px' }}>
+
+            {/* Section heading — clearly NOT a link */}
             <p style={{
-              color: 'rgba(255,255,255,0.35)', fontSize: '11px',
-              fontWeight: 600, letterSpacing: '0.1em',
-              padding: '0 8px', marginBottom: '6px',
+              color: theme.accent,
+              fontSize: '10px', fontWeight: 700,
+              letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '0 10px', marginBottom: '6px', marginTop: '4px',
+              opacity: 0.8,
             }}>
-              {section.section.toUpperCase()}
+              {section.section}
             </p>
-            {section.topics.map(topic => (
-              <button key={topic.id} onClick={() => setActive(topic.id)} style={{
-                width: '100%', textAlign: 'left', padding: '8px',
-                borderRadius: '6px', border: 'none', cursor: 'pointer',
-                fontSize: '13px',
-                color: active === topic.id ? '#c4b5fd' : 'rgba(255,255,255,0.45)',
-                background: active === topic.id ? 'rgba(139,92,246,0.12)' : 'transparent',
-                fontFamily: 'inherit', transition: 'all 0.15s',
-              }}>
-                {topic.title}
-              </button>
-            ))}
+
+            {/* Topic links */}
+            {section.topics.map(topic => {
+              const isActive = active === topic.id
+              return (
+                <button
+                  key={topic.id}
+                  onClick={() => setActive(topic.id)}
+                  style={{
+                    width: '100%', textAlign: 'left',
+                    padding: '8px 10px', borderRadius: '7px',
+                    border: 'none', cursor: 'pointer',
+                    fontSize: '13px', lineHeight: 1.4,
+                    color: isActive ? theme.accentText : theme.textMuted,
+                    background: isActive ? theme.accentBg : 'transparent',
+                    fontFamily: 'inherit',
+                    transition: 'all 0.15s',
+                    borderLeft: isActive ? `2px solid ${theme.accent}` : '2px solid transparent',
+                    fontWeight: isActive ? 600 : 400,
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) e.currentTarget.style.color = theme.text
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) e.currentTarget.style.color = theme.textMuted
+                  }}
+                >
+                  {topic.title}
+                </button>
+              )
+            })}
           </div>
         ))}
       </div>
 
-      {/* Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '48px 60px' }}>
+      {/* Content panel */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '44px 56px 60px' }}>
         <motion.div
           key={active}
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.18 }}
         >
           <h1 style={{
             fontFamily: "'Syne', sans-serif",
-            fontSize: '32px', fontWeight: 800,
-            letterSpacing: '-1px', marginBottom: '28px',
-            color: '#f1f5f9',
+            fontSize: 'clamp(22px, 3vw, 32px)',
+            fontWeight: 800, letterSpacing: '-0.8px',
+            marginBottom: '28px', color: theme.text,
+            lineHeight: 1.2,
           }}>
             {current.title}
           </h1>
           <div style={{
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: '14px', lineHeight: 2,
-            whiteSpace: 'pre-wrap', maxWidth: '680px',
+            fontSize: '14px', color: theme.textMuted,
+            lineHeight: 2, whiteSpace: 'pre-wrap',
+            maxWidth: '660px',
           }}>
             {current.content}
           </div>
