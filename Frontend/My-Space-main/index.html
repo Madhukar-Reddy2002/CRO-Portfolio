@@ -133,9 +133,9 @@ ul,ol{list-style:none}
 /* BENTO */
 #about{background:var(--bg)}
 .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:.8rem}
-.bc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.6rem;overflow:hidden;transition:border-color .3s}
+.bc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.6rem;overflow:hidden;transition:border-color .3s;display:flex;flex-direction:column}
 .bc:hover{border-color:var(--b2)}
-.bi{grid-column:span 7}.bph{grid-column:span 5;padding:0;position:relative;min-height:220px;overflow:hidden;cursor:pointer}.bs1{grid-column:span 4}.bs2{grid-column:span 4}.bs3{grid-column:span 4}.bq{grid-column:span 12;padding:1.8rem 2.2rem}
+.bi{grid-column:span 7}.bph{grid-column:span 5;padding:0;position:relative;min-height:220px;overflow:hidden;cursor:pointer;display:block}.bs1{grid-column:span 4}.bs2{grid-column:span 4}.bs3{grid-column:span 4}.bq{grid-column:span 12;padding:1.8rem 2.2rem;justify-content:center}
 @media(max-width:1000px){.bi,.bph,.bs1,.bs2,.bs3,.bq{grid-column:span 12}}
 @media(min-width:700px) and (max-width:1000px){.bi{grid-column:span 7}.bph{grid-column:span 5}.bs1,.bs2,.bs3{grid-column:span 4}}
 .bph img{width:100%;height:100%;min-height:220px;object-fit:cover;object-position:top center;filter:grayscale(15%);transition:filter .4s,transform .4s}
@@ -146,9 +146,9 @@ ul,ol{list-style:none}
 .bpl span{font-family:var(--fm);font-size:.63rem;color:var(--fg3)}
 .bc h3{font-family:var(--fd);font-size:1.6rem;letter-spacing:.02em;margin-bottom:.7rem}
 .bc p{font-size:.86rem;color:var(--fg2);line-height:1.75}
-.pw{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem}
+.pw{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:.8rem}
 .pill{font-family:var(--fm);font-size:.64rem;letter-spacing:.04em;padding:.2rem .65rem;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r);color:var(--fg2);transition:all .2s}
-.pill:hover,.pill.hi{color:var(--acc);border-color:rgba(0,229,255,.3)}
+.pill:hover,.pill.hl{color:var(--acc);border-color:rgba(0,229,255,.3)}
 .pill.am{color:var(--acc2);border-color:rgba(240,165,0,.3)}
 .bq blockquote{font-family:var(--fd);font-size:clamp(1.2rem,2.8vw,2rem);line-height:1.2;letter-spacing:.02em;color:var(--fg2)}
 .bq blockquote em{color:var(--acc);font-style:normal}
@@ -174,14 +174,16 @@ ul,ol{list-style:none}
 
 /* SKILLS */
 #skills{background:var(--bg)}
-.skg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.9rem}
-.sk{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;transition:border-color .3s,transform .3s}
+.skg{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+@media(max-width:900px){.skg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.skg{grid-template-columns:1fr}}
+.sk{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;transition:border-color .3s,transform .3s;display:flex;flex-direction:column}
 .sk:hover{border-color:var(--b2);transform:translateY(-2px)}
 .skh{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
 .ski{width:36px;height:36px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 .skn{font-family:var(--fd);font-size:1.15rem;letter-spacing:.03em}
 .skd{font-size:.82rem;color:var(--fg3);line-height:1.55;margin-bottom:1rem}
-.skp{display:flex;flex-wrap:wrap;gap:.3rem}
+.skp{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:auto;padding-top:.8rem}
 .sp{font-family:var(--fm);font-size:.62rem;letter-spacing:.04em;padding:.18rem .6rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);color:var(--fg3);transition:all .2s}
 .sp:hover,.sp.h{color:var(--acc);border-color:rgba(0,229,255,.25)}
 
@@ -334,7 +336,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.3rem 4%
   <div class="hi">
     <div>
       <div class="hey"><span class="hd"></span>Open to Roles — 2025</div>
-      <h1 class="hn">MADHU<br><span class="out">KAR.</span></h1>
+      <h1 class="hn">MADHUKAR<br><span class="out">REDDY.</span></h1>
       <div class="hrole">
         <span>CRO Analyst</span><span class="hsep">/</span>
         <span>Data Engineer</span><span class="hsep">/</span>
@@ -405,7 +407,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.3rem 4%
         <h3>Beyond the Dashboard</h3>
         <p>I started in Data Science — fascinated by what numbers reveal. But insights sitting in a slide deck die there. So I learned to build what was needed to make them live and automated.</p>
         <p style="margin-top:.8rem">At <strong style="color:var(--fg)">iQuanti</strong> I work across BFSI clients: optimising conversion funnels, building automated reporting pipelines (GA4/VWO → Snowflake → Power BI), and running end-to-end A/B experiments. My edge is I don't just analyse — I engineer the infrastructure around the analysis.</p>
-        <div class="pw"><span class="pill hi">CRO</span><span class="pill hi">GA4</span><span class="pill am">BFSI Domain</span><span class="pill">Automation</span><span class="pill">Pipelines</span><span class="pill">Full-Stack</span><span class="pill">ML/DL</span></div>
+        <div class="pw"><span class="pill hl">CRO</span><span class="pill hl">GA4</span><span class="pill am">BFSI Domain</span><span class="pill">Automation</span><span class="pill">Pipelines</span><span class="pill">Full-Stack</span><span class="pill">ML/DL</span></div>
       </div>
       <div class="bc bph">
         <img src="assets/dp.jpg" alt="Madhukar Reddy, CRO Analyst and Data Engineer" loading="lazy">
@@ -416,19 +418,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.3rem 4%
         <div class="sl" style="font-size:.6rem;margin-bottom:.5rem">Analytics Stack</div>
         <h3 style="font-size:1.3rem">Data & CRO</h3>
         <p style="font-size:.82rem">GA4 → Snowflake → Power BI. End-to-end data flows with VWO experiment data integration.</p>
-        <div class="pw"><span class="pill hi">Python</span><span class="pill hi">SQL</span><span class="pill hi">GA4</span><span class="pill hi">VWO</span><span class="pill">Snowflake</span><span class="pill">Power BI</span></div>
+        <div class="pw"><span class="pill hl">Python</span><span class="pill hl">SQL</span><span class="pill hl">GA4</span><span class="pill hl">VWO</span><span class="pill">Snowflake</span><span class="pill">Power BI</span></div>
       </div>
       <div class="bc bs2">
         <div class="sl" style="font-size:.6rem;margin-bottom:.5rem">Web Stack</div>
         <h3 style="font-size:1.3rem">Full-Stack</h3>
         <p style="font-size:.82rem">Custom analytics tools, production APIs, and data-driven web apps built from scratch.</p>
-        <div class="pw"><span class="pill hi">React</span><span class="pill hi">FastAPI</span><span class="pill">Next.js</span><span class="pill">Django</span><span class="pill">MongoDB</span></div>
+        <div class="pw"><span class="pill hl">React</span><span class="pill hl">FastAPI</span><span class="pill">Next.js</span><span class="pill">Django</span><span class="pill">MongoDB</span></div>
       </div>
       <div class="bc bs3">
         <div class="sl" style="font-size:.6rem;margin-bottom:.5rem">ML Stack</div>
         <h3 style="font-size:1.3rem">Machine Learning</h3>
         <p style="font-size:.82rem">CNNs, classification, and predictive systems using TensorFlow and Scikit-learn.</p>
-        <div class="pw"><span class="pill hi">TensorFlow</span><span class="pill hi">Scikit-learn</span><span class="pill">CNNs</span></div>
+        <div class="pw"><span class="pill hl">TensorFlow</span><span class="pill hl">Scikit-learn</span><span class="pill">CNNs</span></div>
       </div>
       <div class="bc bq">
         <blockquote>"Insights without implementation are just slides. I build <em>both</em>."</blockquote>
@@ -649,8 +651,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.3rem 4%
         <p style="font-size:.9rem;color:var(--fg2);line-height:1.75;margin-bottom:1.4rem">Open to roles in automation engineering, data engineering, or AI/ML. Also up for interesting freelance projects. Drop a message.</p>
         <div style="font-family:var(--fm);font-size:.7rem;color:var(--fg3);padding:.65rem 1rem;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;gap:.4rem"><span style="color:var(--acc)">//</span> Currently: Junior CRO Analyst @ iQuanti · Bengaluru</div>
         <div class="ctls">
-          <a class="cl" href="mailto:madhukar@email.com"><div class="cli">✉️</div><div><div class="cll">Email</div><div class="clv">madhukar@email.com</div></div><span class="cla">↗</span></a>
-          <a class="cl" href="https://linkedin.com/in/madhukar-reddy" target="_blank" rel="noopener"><div class="cli">💼</div><div><div class="cll">LinkedIn</div><div class="clv">linkedin.com/in/madhukar-reddy</div></div><span class="cla">↗</span></a>
+          <a class="cl" href="mailto:tomadhukarreddy@gmail.com"><div class="cli">✉️</div><div><div class="cll">Email</div><div class="clv">tomadhukarreddy@gmail.com</div></div><span class="cla">↗</span></a>
+          <a class="cl" href="https://in.linkedin.com/in/dandumadhukarreddy" target="_blank" rel="noopener"><div class="cli">💼</div><div><div class="cll">LinkedIn</div><div class="clv">in.linkedin.com/in/dandumadhukarreddy</div></div><span class="cla">↗</span></a>
           <a class="cl" href="https://github.com/Madhukar-Reddy2002" target="_blank" rel="noopener"><div class="cli">⬡</div><div><div class="cll">GitHub</div><div class="clv">Madhukar-Reddy2002</div></div><span class="cla">↗</span></a>
           <a class="cl" href="assets/resume.pdf" target="_blank" style="border-color:rgba(0,229,255,.25)"><div class="cli">📄</div><div><div class="cll">Resume</div><div class="clv" style="color:var(--acc)">Download PDF</div></div><span class="cla" style="opacity:1">↓</span></a>
         </div>
